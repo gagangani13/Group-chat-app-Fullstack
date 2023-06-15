@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState,  } from "react";
 import { Form, NavLink, Button, FloatingLabel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
@@ -17,7 +17,7 @@ const LOGIN = () => {
   const mobileRef=useRef();
   const [login, setLogin] = useState(true);
   const [newPassword, setNewPassword] = useState(false);
-
+  
   function setLoginHandler() {
     if (login) {
       setLogin(false);
@@ -91,9 +91,11 @@ const LOGIN = () => {
           passwordRef.current.value = "";
           const token = localStorage.setItem("idToken", data.idToken);
           const userId = localStorage.setItem("userId", data.emailId);
+          const userName=localStorage.setItem("userName",data.name)
           dispatch(authAction.loginHandler());
           dispatch(authAction.setToken(token));
           dispatch(authAction.setUserId(userId));
+          dispatch(authAction.setUserName(userName))
         } else {
           throw new Error();
         }
@@ -103,7 +105,7 @@ const LOGIN = () => {
     }
   }
   return (
-    <>
+    <motion.div animate={{y:0}} initial={{y:'100vh'}} transition={{type:'tween',duration:1}}>
       <div id="webpage"></div>
       <div>
         <div className="title">
@@ -251,13 +253,13 @@ const LOGIN = () => {
             </Form>
             {loginState && (
               <Route>
-                <Redirect to="/WELCOME" />
+                <Redirect to="/Home" />
               </Route>
             )}
           </div>
         </motion.div>
       </div>
-    </>
+    </motion.div>
   );
 };
 

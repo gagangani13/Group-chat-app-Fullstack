@@ -1,0 +1,54 @@
+.messages{
+    width: 49vw;
+    position: relative;
+    height: 70vh;
+    overflow: auto;
+}
+.personMsg{
+    color: beige;
+    max-width: 40vw;
+    background-color: chocolate;
+    display: block;
+    border-radius: 7px;
+    text-align: left;
+    padding: 5px;
+    min-width: 20vw;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 5rem;
+    margin-left: 1rem;
+}
+
+.myMsg{
+    color: beige;
+    background-color: #73655b;
+    display: block;
+    border-radius: 7px;
+    text-align: right;
+    padding: 5px;
+    min-width: 20vw;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-left: 5rem;
+}
+
+.personName{
+    font-size: small;
+    margin: 0;
+}
+
+.personText{
+    margin: 0;
+}
+
+.joinMsg{
+    color: black;
+    background-color: #e6e1dd;
+    display: block;
+    border-radius: 7px;
+    text-align: center;
+    padding: 2px;
+    width: 35vw;
+    margin: auto;
+}

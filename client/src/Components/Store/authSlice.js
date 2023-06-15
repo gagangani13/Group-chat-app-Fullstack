@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialAuthState={login:false,idToken:'',userId:''}
+const initialAuthState={login:false,idToken:'',userId:'',userName:''}
 const authSlice=createSlice({
     name:'authentication',
     initialState:initialAuthState,
@@ -16,6 +16,9 @@ const authSlice=createSlice({
         setUserId(state,action){
             state.userId=action.payload
         },
+        setUserName(state,action){
+            state.userName=action.payload
+        }
     }
 })
 export const authAction=authSlice.actions

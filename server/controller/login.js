@@ -51,6 +51,7 @@ module.exports.loginUser = async (req, res, next) => {
           emailId: getUser[0].email,
           id: getUser[0].id,
           idToken: userEncrypt(getUser[0].id),
+          name:getUser[0].name
         });
       } else {
         res.status(200).send({ message: "Incorrect password", ok: false });
