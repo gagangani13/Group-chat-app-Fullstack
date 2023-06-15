@@ -15,10 +15,13 @@ module.exports.User=database.define('User',{
         allowNull:false,
         type:STRING
     },
-    name:STRING,
-    premium:BOOLEAN,
-    totalExpense:{
-        type:INTEGER,
-        allowNull:false,
+    name:{
+        type:STRING,
+        allowNull:false
+    },
+    mobile:{
+        type:STRING,
+        unique:true,
+        allowNull:false
     }
 })
