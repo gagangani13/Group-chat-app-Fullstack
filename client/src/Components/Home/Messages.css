@@ -52,3 +52,21 @@
     width: 35vw;
     margin: auto;
 }
+
+#oldMessage{
+    width: -webkit-fill-available;
+    background: linear-gradient(45deg, black, transparent);
+    color: aliceblue;
+    padding: 5px;
+}
+
+#latestMessage{
+    position: absolute;
+    left: 42vw;
+    top: 61vh;
+    z-index: 5;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: black;
+    color: aliceblue;
+}

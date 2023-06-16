@@ -16,6 +16,6 @@ router.post('/updatePassword/:Id',login.updatePassword)
 
 //Messages
 router.post('/sendMessage',tokenDecrypt,message.sendMessage)
-router.get('/getMessages',message.getMessages)
+router.get('/getMessages',tokenDecrypt,message.getMessages)
 
 module.exports=router
