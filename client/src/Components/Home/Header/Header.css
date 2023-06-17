@@ -1,0 +1,26 @@
+header{
+    width: 100vw;
+    height: 8vh;
+    background: linear-gradient(45deg, black, #45536e);
+    z-index: 5;
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    color: bisque;
+
+}
+
+header h1{
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.NavLink{
+    color: unset;
+    text-decoration: none;
+}
+
+.activeLink{
+    color: chocolate;
+    scale: 1.1;
+    font-weight: bold;
+}

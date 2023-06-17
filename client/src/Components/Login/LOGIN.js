@@ -105,8 +105,8 @@ const LOGIN = () => {
     }
   }
   return (
-    <motion.div animate={{y:0}} initial={{y:'100vh'}} transition={{type:'tween',duration:1}}>
-      <div id="webpage"></div>
+    <motion.div animate={{y:0}} initial={{y:'100vh'}} transition={{type:'tween',duration:1}} id="loginPage">
+      <div id="startpage"></div>
       <div>
         <div className="title">
           <lottie-player
@@ -253,7 +253,7 @@ const LOGIN = () => {
             </Form>
             {loginState && (
               <Route>
-                <Redirect to="/Home" />
+                <Redirect to="/Chats" />
               </Route>
             )}
           </div>

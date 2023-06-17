@@ -1,0 +1,44 @@
+.chats{
+    text-align: center;
+    background: linear-gradient(266deg, #FF9800, #fff5f5);
+    display: flex;
+    padding: 5px;
+    border-radius: 7px 7px 0 0;
+    justify-content: space-around;
+}
+
+.chat{
+    display: grid;
+    grid-template-columns: 5vw auto 6vw;
+    text-align: center;
+    background: linear-gradient(45deg, black, transparent);
+    color: antiquewhite;
+    padding: 5px;
+    margin: 1rem 0.2rem;
+}
+
+.viewChatBtn{
+    background-color: blanchedalmond;
+    border: solid;
+}
+
+.viewChatBtn:hover{
+    background-color: rgba(255, 235, 205, 0.274);
+    color: white;
+}
+
+.chatList{
+    position: relative;
+}
+
+.newGroup{
+    border-radius: 12px;
+    background: darkgrey;
+    font-size: small;
+    border: unset;
+}
+
+.newGroup:hover{
+    background: rgba(20, 20, 20, 0.749);
+    color: white;
+}

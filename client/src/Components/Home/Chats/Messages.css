@@ -1,9 +1,4 @@
-.messages{
-    width: 49vw;
-    position: relative;
-    height: 70vh;
-    overflow: auto;
-}
+
 .personMsg{
     color: beige;
     max-width: 40vw;
@@ -69,4 +64,44 @@
     border-radius: 50%;
     background-color: black;
     color: aliceblue;
+}
+
+.groupName{
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 5vw auto;
+    background: linear-gradient(229deg, black, #201e1eeb);
+    position: sticky;
+    top: 3rem;
+    width: 80vw;
+    left: 10vw;
+    z-index: 5;
+    color: #45536e;
+    border-radius: 3px;
+}
+
+.backBtn{
+    background-color: beige;
+    border-radius: 50%;
+}
+
+.backBtn:hover{
+    background-color: rgba(245, 245, 220, 0.145);
+    color: white;
+}
+
+#sendMessage{
+    position: sticky;
+    width: 79vw;
+    display: flex;
+    left: 11vw;
+    justify-content: space-between;
+    margin: 1rem 0;
+    z-index: 10;
+    bottom: 5px;
+}
+
+#formInput{
+    background: black;
+    color: azure;
 }

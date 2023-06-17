@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+#sendMessage{
+    position: relative;
+    width: 40vw;
+    display: flex;
+    left: 5vw;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+.sendBtn{
+    padding: 10px;
+    margin: 0 0.5rem;
+    border-radius: 5px;
+}
+.sendBtn:hover{
+    background-color: #45536e;
+    border: 2px solid wheat;
+}

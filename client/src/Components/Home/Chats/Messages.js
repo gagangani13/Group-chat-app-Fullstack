@@ -3,7 +3,8 @@ import "./Messages.css";
 import { useDispatch, useSelector } from 'react-redux'
 import { Form } from "react-bootstrap";
 import axios from "axios";
-import { messageAction } from "../Store/messageSlice";
+import { messageAction } from "../../Store/messageSlice";
+import Main from "../Main/Main";
 
 
 const Messages = () => {
@@ -44,9 +45,7 @@ const Messages = () => {
       console.log(error);
     }
     getMessages()
-  }
-
-  
+  } 
   async function getMessages(params=0) {
     const response = await axios.get(
       `http://localhost:5000/getMessages?offset=${params}`,
@@ -86,8 +85,9 @@ const Messages = () => {
         getMessages(data.latestOffset);
       }, 2000)]);
     }else{
-      for(let i in timer){ // Tried to remove this but again problem started. Even if the timer useState is updated to empty [], the timers must be cleared
+      for(let i in timer){ 
         clearTimeout(timer[i])
+        // Tried to remove this but again problem started. Even if the timer useState is updated to empty [], the timers must be cleared
       }
       updateTimer([])
     }
@@ -95,8 +95,9 @@ const Messages = () => {
   }
   return (
     <>
+    {<div className="groupName"><button className="fa-solid fa-arrow-left-long backBtn"></button><h3>Group name</h3></div>}
     {btns.nextOffset!==btns.latestOffset&&<button id='latestMessage' className="fa-solid fa-angles-down" onClick={()=>getMessages(btns.latestOffset)}></button>}
-    <div className="messages">
+      <Main>
       {btns.currOffset!==0&&<button id="oldMessage" onClick={()=>getMessages(btns.oldOffset)}>View old messages</button>}
       {messages.map((person) => {
         return (<>
@@ -113,12 +114,13 @@ const Messages = () => {
         );
       })}
       {btns.nextOffset!==btns.currOffset&&<button id="oldMessage" onClick={()=>getMessages(btns.nextOffset)} type="button">View new messages</button>}
-    </div>
+      </Main>
     <Form id="sendMessage" onSubmit={sendMessage}>
     <Form.Control
       type="text"
       placeholder="Type your message here ..."
       ref={messageRef}
+      id="formInput"
       required
     />
     <button

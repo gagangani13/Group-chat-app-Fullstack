@@ -1,0 +1,11 @@
+main{
+    position: relative;
+    top: 10vh;
+    width: 80vw;
+    left: 10vw;
+    background-color: #020921f5;
+    box-shadow: 0 2px 5px black;
+    border: 2px solid #f57f3b;
+    border-radius: 10px;
+    margin-bottom: 5rem;
+}
