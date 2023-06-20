@@ -3,8 +3,9 @@
     background: linear-gradient(266deg, #FF9800, #fff5f5);
     display: flex;
     padding: 5px;
-    border-radius: 7px 7px 0 0;
+    border-radius: 7px;
     justify-content: space-around;
+    margin: 0;
 }
 
 .chat{
@@ -41,4 +42,10 @@
 .newGroup:hover{
     background: rgba(20, 20, 20, 0.749);
     color: white;
+}
+
+.noGroups{
+    color: aliceblue;
+    text-align: center;
+    margin: 1rem;
 }

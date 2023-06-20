@@ -1,10 +1,31 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Main from "../Main/Main";
 import { Form } from "react-bootstrap";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 const NewGroup = () => {
   const groupRef = useRef();
-  function createGroup(params) {}
+  const[chats,setChats]=useState(false)
+  const idToken=useSelector(state=>state.authenticate.idToken)
+  async function createGroup(e) {
+    e.preventDefault();
+    if (!groupRef.current.value) {
+      return alert('Invalid input')
+    }
+    const response=await axios.post('http://localhost:5000/createGroup',{groupName:groupRef.current.value},{headers:{'Authorization':idToken}})
+    const data=await response.data
+    try {
+      if (!data.ok) {
+        throw new Error()
+      }
+      setChats(true)
+      alert("Created new group successfully")
+    } catch (error) {
+      alert(data.error)
+    }
+  }
   return (
     <Main>
       <Form id="sendMessage" onSubmit={createGroup}>
@@ -15,15 +36,9 @@ const NewGroup = () => {
           id="formInput"
           required
         />
-        <Form.Check
-            label="1"
-            name="group1"
-            type='checkbox'
-            id={`inline-checkbox-1`}
-          />
         <button type="submit">Create</button>
-
       </Form>
+      {chats&&<Redirect to='/chats'/>}
     </Main>
   );
 };

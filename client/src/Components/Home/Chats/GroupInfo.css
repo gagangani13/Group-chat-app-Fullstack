@@ -1,0 +1,51 @@
+.participants{
+    display: grid;
+    text-align: center;
+    color: aliceblue;
+    width: 60vw;
+    margin: 1rem auto;
+    row-gap: 0.5rem;
+}
+
+.participantsRow{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.admin{
+    color: green;
+}
+
+.optionsTab{
+    width: 70vw;
+    height: 35vh;
+    background: linear-gradient(45deg, black, #512724d1);
+    position: fixed;
+    border-radius: 1rem;
+    z-index: 10;
+    right: 15vw;
+    top: 10rem;
+}
+
+.btnsAlign{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    top: 50%;
+}
+
+.btnsAlign button, li button, input+button{
+    padding: 4px;
+    border-radius: 8px;
+    border: none;
+    background: bisque;
+    font-weight: 500;
+}
+
+.btnsAlign button:hover, li button:hover,input+button:hover{
+    background-color: green;
+}
+
+.optionsTab h6{
+    margin: 10px;
+}

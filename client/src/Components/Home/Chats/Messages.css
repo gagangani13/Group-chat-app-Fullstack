@@ -45,7 +45,7 @@
     text-align: center;
     padding: 2px;
     width: 35vw;
-    margin: auto;
+    margin: 2rem auto;
 }
 
 #oldMessage{
@@ -56,9 +56,9 @@
 }
 
 #latestMessage{
-    position: absolute;
-    left: 42vw;
-    top: 61vh;
+    position: sticky;
+    left: 83vw;
+    top: 83vh;
     z-index: 5;
     padding: 8px;
     border-radius: 50%;
@@ -68,12 +68,10 @@
 
 .groupName{
     display: grid;
-    justify-content: space-between;
     grid-template-columns: 5vw auto;
-    background: linear-gradient(229deg, black, #201e1eeb);
     position: sticky;
-    top: 3rem;
-    width: 80vw;
+    top: 9vh;
+    width: 79.5vw;
     left: 10vw;
     z-index: 5;
     color: #45536e;
@@ -82,7 +80,7 @@
 
 .backBtn{
     background-color: beige;
-    border-radius: 50%;
+    border-radius: 24%;
 }
 
 .backBtn:hover{
@@ -92,11 +90,11 @@
 
 #sendMessage{
     position: sticky;
-    width: 79vw;
+    width: 75vw;
     display: flex;
     left: 11vw;
     justify-content: space-between;
-    margin: 1rem 0;
+    margin: 1rem;
     z-index: 10;
     bottom: 5px;
 }
@@ -104,4 +102,5 @@
 #formInput{
     background: black;
     color: azure;
+    margin: 0 1rem;
 }

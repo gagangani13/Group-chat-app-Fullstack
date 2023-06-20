@@ -1,5 +1,4 @@
 const jwt  = require("jsonwebtoken")
-const { User } = require("../model/user")
 require('dotenv').config()
 module.exports.tokenDecrypt=(req,res,next)=>{
     try {
@@ -8,6 +7,7 @@ module.exports.tokenDecrypt=(req,res,next)=>{
         req.userId=decode
         next()
     } catch (error) {
-        res.send({message:'Token Error'})
+        console.error(error)
+        res.send({error:'Token Error'})
     }
 }

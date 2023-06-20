@@ -17,6 +17,10 @@ const Messages = () => {
   let handleBtns={latestOffset:localStorage.getItem('latestOffset'),nextOffset:localStorage.getItem('nextOffset'),localStorageMsgs: JSON.parse(localStorage.getItem('localStorageMsgs')),currOffset:localStorage.getItem('currOffset'),oldOffset:localStorage.getItem('oldOffset')}
   const [btns,setBtns]=useState(handleBtns)
   const [timer,updateTimer]=useState([]);
+  const groupInfo=useSelector(state=>state.messageReducer.groupInfo)
+  const groupName=groupInfo.groupName
+  const groupId=groupInfo.groupId
+
   useEffect(()=>{
     if (localStorageMsgs&&localStorageMsgs.length>0) {
         dispatch(messageAction.loadMessages(localStorageMsgs))
@@ -28,7 +32,7 @@ const Messages = () => {
   },[])
   async function sendMessage(e) {
     e.preventDefault();
-    const details = { message: messageRef.current.value };
+    const details = { message: messageRef.current.value, groupId };
     const response = await axios.post(
       "http://localhost:5000/sendMessage",
       details,
@@ -44,11 +48,11 @@ const Messages = () => {
     } catch (error) {
       console.log(error);
     }
-    getMessages()
+    getMessages(handleBtns.latestOffset)
   } 
   async function getMessages(params=0) {
     const response = await axios.get(
-      `http://localhost:5000/getMessages?offset=${params}`,
+      `http://localhost:5000/getMessages?offset=${params}&groupId=${groupId}`,
       { headers: { Authorization: idToken } }
     );
     const data = await response.data;
@@ -57,7 +61,7 @@ const Messages = () => {
         throw new Error();
       } 
       let arr;
-      if (messages && messages.length!==0) {
+      if (messages && messages.length===10) {
         arr=[...messages]
       } else {
         arr=[]
@@ -72,7 +76,9 @@ const Messages = () => {
       dispatch(messageAction.loadMessages(arr));
       localStorage.setItem('latestOffset',data.latestOffset)
       localStorage.setItem('nextOffset',data.nextOffset)
-      localStorage.setItem('localStorageMsgs',JSON.stringify(arr))
+      if (arr.length===10) {
+        localStorage.setItem('localStorageMsgs',JSON.stringify(arr)) 
+      }
       localStorage.setItem('currOffset',params)
       localStorage.setItem('oldOffset',data.oldOffset)
       setBtns({latestOffset:data.latestOffset,nextOffset:data.nextOffset,localStorageMsgs: JSON.stringify(arr),currOffset:params,oldOffset:data.oldOffset})
@@ -83,32 +89,47 @@ const Messages = () => {
     if (data.currOffset===data.latestOffset) {
       updateTimer([setTimeout(() => {
         getMessages(data.latestOffset);
-      }, 2000)]);
+      }, 1000)]);
     }else{
       for(let i in timer){ 
         clearTimeout(timer[i])
-        // Tried to remove this but again problem started. Even if the timer useState is updated to empty [], the timers must be cleared
       }
       updateTimer([])
     }
-    //very important I almost tried 6 hours.. when ever timer is called inside a function it will create new timer Id for each function call. So when you clear timer only one timer gets cleared not all. So you need to clear in such a way that entire timers must stop. So here I'm updating the timer useState only on latest chats, when the chats are older the timer is cleared so that it won't make problem.
+  }
+  function goBack() {
+    dispatch(messageAction.setShowMessage(false))
+    dispatch(messageAction.setGroupInfo(null))
+    dispatch(messageAction.loadMessages([]))
+    localStorage.removeItem('localStorageMsgs')
+    localStorage.removeItem('oldOffset')  
+    localStorage.removeItem('nextOffset')
+    localStorage.removeItem('currOffset')
+    localStorage.removeItem('latestOffset')
+
+    if (timer.length>0) {
+      for(let i in timer){ 
+        clearTimeout(timer[i])
+      }
+      updateTimer([])
+    }
   }
   return (
     <>
-    {<div className="groupName"><button className="fa-solid fa-arrow-left-long backBtn"></button><h3>Group name</h3></div>}
+    {<div className="groupName"><button type='button' onClick={goBack} className="fa-solid fa-arrow-left-long backBtn"></button><h3 className="chats">{groupName}</h3></div>}
     {btns.nextOffset!==btns.latestOffset&&<button id='latestMessage' className="fa-solid fa-angles-down" onClick={()=>getMessages(btns.latestOffset)}></button>}
       <Main>
       {btns.currOffset!==0&&<button id="oldMessage" onClick={()=>getMessages(btns.oldOffset)}>View old messages</button>}
       {messages.map((person) => {
         return (<>
-          {person.message!=='Joined'&&<div className={person.name === userName ? "myMsg" : "personMsg"}>
+          {person.name!=='Admin'&&<div className={person.name === userName ? "myMsg" : "personMsg"}>
             <p className="personName">
               {person.name === userName ? "You" : person.name}
             </p>
             <p className="personText">{person.message}</p>
           </div>}
-          {person.message==='Joined'&&<p className='joinMsg'>
-            {person.name === userName ? "You" : person.name} joined this group
+          {person.name==='Admin'&&<p className='joinMsg'>
+            {person.message}
             </p>}
         </>
         );

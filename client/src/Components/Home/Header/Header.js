@@ -38,7 +38,7 @@ const Header = () => {
                   initial="initial"
                   whileHover="whileHover"
                 >
-                  <NavLink to='/NewGroup' activeClassName="active-link" className='NavLink'>New Group</NavLink>
+                  <NavLink to='/NewGroup' activeClassName="activeLink" className='NavLink'>New Group</NavLink>
                 </motion.span>
                 <motion.span
                   variants={navLinkVariant}
