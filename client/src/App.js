@@ -9,9 +9,9 @@ import Header from "./Components/Home/Header/Header";
 import Chats from "./Components/Home/Chats/Chats";
 import './App.css'
 import NewGroup from "./Components/Home/NewGroup/NewGroup";
-import io from 'socket.io-client'
 
-const socket = io.connect("http://localhost:5000");
+
+
 
 const App = () => {
   const location=useLocation()

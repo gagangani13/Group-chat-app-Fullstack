@@ -5,9 +5,10 @@ import { Form } from "react-bootstrap";
 import axios from "axios";
 import { messageAction } from "../../Store/messageSlice";
 import Main from "../Main/Main";
-
-
+import io  from "socket.io-client";
 const Messages = () => {
+  const socket=io.connect('http://localhost:5000')
+
   const userName=useSelector(state=>state.authenticate.userName)
   const messages=useSelector(state=>state.messageReducer.messages)
   const messageRef = useRef();
@@ -16,7 +17,6 @@ const Messages = () => {
   const localStorageMsgs=JSON.parse(localStorage.getItem('localStorageMsgs'))
   let handleBtns={latestOffset:localStorage.getItem('latestOffset'),nextOffset:localStorage.getItem('nextOffset'),localStorageMsgs: JSON.parse(localStorage.getItem('localStorageMsgs')),currOffset:localStorage.getItem('currOffset'),oldOffset:localStorage.getItem('oldOffset')}
   const [btns,setBtns]=useState(handleBtns)
-  const [timer,updateTimer]=useState([]);
   const groupInfo=useSelector(state=>state.messageReducer.groupInfo)
   const groupName=groupInfo.groupName
   const groupId=groupInfo.groupId
@@ -25,11 +25,16 @@ const Messages = () => {
     if (localStorageMsgs&&localStorageMsgs.length>0) {
         dispatch(messageAction.loadMessages(localStorageMsgs))
     }
-    getMessages(handleBtns.latestOffset);
-  
-    return console.log('clean');
+    getMessages(null);
     // eslint-disable-next-line
   },[])
+
+  useEffect(()=>{
+    socket.on("receiveMessage",(data)=>{
+      getMessages(null)
+    })
+    // eslint-disable-next-line
+  },[socket])
   async function sendMessage(e) {
     e.preventDefault();
     const details = { message: messageRef.current.value, groupId };
@@ -43,12 +48,13 @@ const Messages = () => {
       if (!data.ok) {
         throw new Error();
       } else {
+        await socket.emit("sendMessage",details)
         messageRef.current.value = "";
       }
     } catch (error) {
       console.log(error);
     }
-    getMessages(handleBtns.latestOffset)
+    getMessages(Number(handleBtns.latestOffset)+1)
   } 
   async function getMessages(params=0) {
     const response = await axios.get(
@@ -79,22 +85,12 @@ const Messages = () => {
       if (arr.length===10) {
         localStorage.setItem('localStorageMsgs',JSON.stringify(arr)) 
       }
-      localStorage.setItem('currOffset',params)
+      localStorage.setItem('currOffset',data.currOffset)
       localStorage.setItem('oldOffset',data.oldOffset)
-      setBtns({latestOffset:data.latestOffset,nextOffset:data.nextOffset,localStorageMsgs: JSON.stringify(arr),currOffset:params,oldOffset:data.oldOffset})
+      setBtns({latestOffset:data.latestOffset,nextOffset:data.nextOffset,localStorageMsgs: JSON.stringify(arr),currOffset:data.currOffset,oldOffset:data.oldOffset})
 
     } catch (error) {
       console.log(data.error);
-    }
-    if (data.currOffset===data.latestOffset) {
-      updateTimer([setTimeout(() => {
-        getMessages(data.latestOffset);
-      }, 1000)]);
-    }else{
-      for(let i in timer){ 
-        clearTimeout(timer[i])
-      }
-      updateTimer([])
     }
   }
   function goBack() {
@@ -106,20 +102,13 @@ const Messages = () => {
     localStorage.removeItem('nextOffset')
     localStorage.removeItem('currOffset')
     localStorage.removeItem('latestOffset')
-
-    if (timer.length>0) {
-      for(let i in timer){ 
-        clearTimeout(timer[i])
-      }
-      updateTimer([])
-    }
   }
   return (
     <>
     {<div className="groupName"><button type='button' onClick={goBack} className="fa-solid fa-arrow-left-long backBtn"></button><h3 className="chats">{groupName}</h3></div>}
     {btns.nextOffset!==btns.latestOffset&&<button id='latestMessage' className="fa-solid fa-angles-down" onClick={()=>getMessages(btns.latestOffset)}></button>}
       <Main>
-      {btns.currOffset!==0&&<button id="oldMessage" onClick={()=>getMessages(btns.oldOffset)}>View old messages</button>}
+      {btns.oldOffset!==0&&<button id="oldMessage" onClick={()=>getMessages(btns.oldOffset)}>View old messages</button>}
       {messages.map((person) => {
         return (<>
           {person.name!=='Admin'&&<div className={person.name === userName ? "myMsg" : "personMsg"}>

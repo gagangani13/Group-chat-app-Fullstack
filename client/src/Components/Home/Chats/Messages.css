@@ -1,7 +1,6 @@
 
 .personMsg{
     color: beige;
-    max-width: 40vw;
     background-color: chocolate;
     display: block;
     border-radius: 7px;
@@ -10,7 +9,7 @@
     min-width: 20vw;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    margin-right: 5rem;
+    margin-right: 10rem;
     margin-left: 1rem;
 }
 
@@ -25,7 +24,7 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     margin-right: 1rem;
-    margin-left: 5rem;
+    margin-left: 10rem;
 }
 
 .personName{

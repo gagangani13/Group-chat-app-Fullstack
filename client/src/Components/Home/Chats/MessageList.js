@@ -7,7 +7,10 @@ import { messageAction } from "../../Store/messageSlice";
 import GroupInfo from "./GroupInfo";
 import axios from "axios";
 import Messages from "./Messages";
+import io from 'socket.io-client'
 const MessageList = () => {
+  const socket = io.connect("http://localhost:5000");
+
   const groupInfo = useSelector((state) => state.messageReducer.groupInfo);
   const idToken = localStorage.getItem("idToken");
   const groups = useSelector((state) => state.messageReducer.groups);
@@ -69,6 +72,7 @@ const MessageList = () => {
                           groupName: item.groupName,
                         })
                       );
+                      socket.emit('joinChat',item.groupId)
                     }}
                     className="fa-solid fa-angle-right viewChatBtn"
                   ></button>
