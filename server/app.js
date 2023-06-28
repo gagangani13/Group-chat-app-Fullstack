@@ -13,8 +13,10 @@ const { GroupUser } = require("./model/groupUser");
 const { Server } = require("socket.io");
 const http = require("http");
 const server = http.createServer(app);
-
-
+const path=require('path')
+const _dirname=path.dirname("")
+const buildPath=path.join(_dirname,"../client/build")
+app.use(express.static(buildPath))
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,14 +35,6 @@ io.on("connection", (socket) => {
     socket.join(data)
     console.log(`User ${socket.id} joined chat ${data}`)
   })
-
-  // socket.on("sendMessage",async(data)=>{
-  //   io.to(data.groupId).emit("receiveMessage",'loadGetMessages',(err,response)=>{
-  //     err&&console.log(err);
-  //     response&&console.log(response);
-  //   })
-  //   console.log(data);
-  // })
 
   socket.on('sendMessage', (data) => {
     try {
@@ -70,7 +64,7 @@ app.use(router);
 
 //wrongUrl
 app.use("/", (req, res) => {
-  res.redirect("http://localhost:3000/");
+  res.redirect("http://localhost:5000/");
 });
 
 database
