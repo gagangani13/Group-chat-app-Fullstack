@@ -27,5 +27,7 @@ router.get('/groups',tokenDecrypt,group.getGroups)
 router.get('/getParticipants',tokenDecrypt,group.getParticipants)
 router.patch('/makeAdmin',tokenDecrypt,adminValidate,group.makeAdmin)
 router.delete('/removeParticipant/:participantId',tokenDecrypt,adminValidate,group.removeParticipant)
+router.delete('/exitGroup/:groupId',tokenDecrypt,group.exitGroup)
+router.patch('/editGroupName',tokenDecrypt,adminValidate,group.editGroupName)
 
 module.exports=router

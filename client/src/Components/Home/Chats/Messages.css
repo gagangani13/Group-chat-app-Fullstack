@@ -8,7 +8,7 @@
     padding: 5px;
     min-width: 20vw;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
     margin-right: 10rem;
     margin-left: 1rem;
 }
@@ -22,7 +22,7 @@
     padding: 5px;
     min-width: 20vw;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     margin-right: 1rem;
     margin-left: 10rem;
 }
@@ -43,8 +43,8 @@
     border-radius: 7px;
     text-align: center;
     padding: 2px;
-    width: 35vw;
-    margin: 2rem auto;
+    width: fit-content;
+    margin: 1rem auto;
 }
 
 #oldMessage{
@@ -67,19 +67,19 @@
 
 .groupName{
     display: grid;
-    grid-template-columns: 5vw auto;
+    grid-template-columns: auto auto;
     position: sticky;
     top: 9vh;
-    width: 79.5vw;
-    left: 10vw;
     z-index: 5;
     color: #45536e;
-    border-radius: 3px;
+    border-radius: inherit;
+    background: linear-gradient(318deg, black, transparent);
+    margin-bottom: 1rem;
 }
 
 .backBtn{
     background-color: beige;
-    border-radius: 24%;
+    width: 5vw;
 }
 
 .backBtn:hover{
@@ -89,17 +89,64 @@
 
 #sendMessage{
     position: sticky;
-    width: 75vw;
+    width: auto;
     display: flex;
-    left: 11vw;
     justify-content: space-between;
     margin: 1rem;
-    z-index: 10;
-    bottom: 5px;
+    z-index: 5;
+    bottom: 1rem;
 }
 
 #formInput{
     background: black;
     color: azure;
     margin: 0 1rem;
+}
+
+.messagesBg{
+    position: relative;
+    top: 10vh;
+    width: 80vw;
+    left: 10vw;
+    background-color: #020921f5;
+    box-shadow: 0 2px 5px black;
+    border: 2px solid #f57f3b;
+    border-radius: 10px;
+    margin-bottom: 5rem;
+    min-height: 82vh;
+}
+
+.messageBlock{
+    min-height: 69vh;
+}
+
+.personTime{
+    color: antiquewhite;
+    margin: 0 1rem;
+    font-size: small;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.myTime{
+    color: antiquewhite;
+    margin: 0 1rem;
+    font-size: small;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+@media screen and (max-width:500px) {
+    .backBtn{
+        padding: 5px;
+        width: 8vw;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .backBtn{
+        padding: 5px;
+        width: 15vw;
+    }
 }

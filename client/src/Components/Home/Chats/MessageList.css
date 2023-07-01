@@ -1,16 +1,31 @@
 .chats{
     text-align: center;
-    background: linear-gradient(266deg, #FF9800, #fff5f5);
+    background: linear-gradient(236deg, #FF9800, #fff5f5);
     display: flex;
     padding: 5px;
-    border-radius: 7px;
+    border-radius: 16rem 7px 0 0;
     justify-content: space-around;
     margin: 0;
+    font-family: cursive;
+    font-weight: 600;
+}
+
+.chatsHome{
+    text-align: center;
+    background: linear-gradient(236deg, #FF9800, #fff5f5);
+    display: flex;
+    padding: 5px;
+    border-radius: 7px 7px 0 0;
+    justify-content: space-around;
+    margin: 0;
+    font-family: cursive;
+    font-weight: 600;
+    color: #0a0707 !important;
 }
 
 .chat{
     display: grid;
-    grid-template-columns: 5vw auto 6vw;
+    grid-template-columns: 5vw auto 5vw;
     text-align: center;
     background: linear-gradient(45deg, black, transparent);
     color: antiquewhite;
@@ -48,4 +63,51 @@
     color: aliceblue;
     text-align: center;
     margin: 1rem;
+}
+
+.viewChatIcon{
+    align-self: center;
+}
+
+.groupsBg{
+    position: relative;
+    top: 10vh;
+    width: 80vw;
+    left: 10vw;
+    background-color: #020921f5;
+    box-shadow: 0 2px 5px black;
+    border: 2px solid #f57f3b;
+    border-radius: 10px;
+    margin-bottom: 5rem;
+}
+
+@media screen and (max-width:600px) {
+    .groupsBg{
+        width: 95vw;
+        left: 2.5vw;
+    }
+    .messagesBg{
+        width: 95vw;
+        left: 2.5vw;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .chat{
+        grid-template-columns: 10vw auto 10vw;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .chat{
+        grid-template-columns: 15vw auto 15vw;
+    }
+    .groupsBg{
+        width: 100vw;
+        left: 0;
+    }
+    .messagesBg{
+        left: 0;
+        width: 100vw;
+    }
 }

@@ -4,7 +4,7 @@ import "./Chats.css";
 import { authAction } from "../../Store/authSlice";
 import Messages from "./Messages";
 import { Redirect } from "react-router-dom";
-import { motion } from "framer-motion";
+import {  motion } from "framer-motion";
 import MessageList from "../Chats/MessageList";
 const Chats = () => {
   const loggedIn = useSelector(state=> state.authenticate.login);
@@ -23,12 +23,11 @@ const Chats = () => {
   }, []);
   return (
     <>
-      {!loggedIn && <Redirect to="/" />}
       {loggedIn && (
         <motion.div
           initial={{ y: "-100vh" }}
           animate={{ y: 0 }}
-          transition={{ type: "tween", duration: 1 }}
+          transition={{ type: "tween", duration: .5 }}
         >
           <>
               {!showMessage&&<MessageList/>}
@@ -36,6 +35,7 @@ const Chats = () => {
           </>
         </motion.div>
       )}
+      {!loggedIn && <Redirect to="/" />}
     </>
   );
 };

@@ -10,6 +10,9 @@
 .participantsRow{
     display: flex;
     justify-content: space-evenly;
+    background: linear-gradient(45deg, black, #101a27);
+    padding: 5px;
+    border-radius: 4px;
 }
 
 .admin{
@@ -17,21 +20,20 @@
 }
 
 .optionsTab{
-    width: 70vw;
     height: 35vh;
-    background: linear-gradient(45deg, black, #512724d1);
-    position: fixed;
+    background: linear-gradient(45deg, #380b2b, #e21829e3);
     border-radius: 1rem;
-    z-index: 10;
-    right: 15vw;
-    top: 10rem;
+    text-align: -webkit-center;
+    color: aliceblue;
 }
 
 .btnsAlign{
     display: flex;
-    justify-content: space-around;
     position: relative;
-    top: 50%;
+    top: 10%;
+    flex-direction: column;
+    width: fit-content;
+    row-gap: 2rem;
 }
 
 .btnsAlign button, li button, input+button{
@@ -49,3 +51,38 @@
 .optionsTab h6{
     margin: 10px;
 }
+
+#exitGroup{
+    background-color: #937171;
+    padding: 5px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+#exitGroup:hover{
+    background-color: rgb(199, 28, 28);
+}
+
+#editGroup{
+    background-color: #937171;
+    padding: 5px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+#editGroup:hover{
+    background-color: green;
+}
+
+@media screen and (max-width:600px) {
+    .participants{
+        width: 80vw;
+    }
+}
+
+/* @media screen and (max-width:300px) {
+    .optionsTab{
+        width: 90vw;
+        left: 5vw;
+    }
+} */

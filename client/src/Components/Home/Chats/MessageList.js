@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import "./MessageList.css";
 import "./Messages.css";
-import Main from "../Main/Main";
 import { useDispatch, useSelector } from "react-redux";
 import { messageAction } from "../../Store/messageSlice";
 import GroupInfo from "./GroupInfo";
 import axios from "axios";
 import Messages from "./Messages";
-import io from 'socket.io-client'
+import io from "socket.io-client";
+import { motion } from "framer-motion";
 const MessageList = () => {
   const socket = io.connect("http://localhost:5000");
 
@@ -20,7 +20,7 @@ const MessageList = () => {
   useEffect(() => {
     getGroups();
     // eslint-disable-next-line
-  }, []);
+  }, [groupInfo]);
 
   async function getGroups() {
     const response = await axios.get("http://localhost:5000/groups", {
@@ -34,49 +34,60 @@ const MessageList = () => {
       let arr = [];
       const data2 = data.groups;
       for (let i in data2) {
-        arr.push({ groupName: data2[i].groupName, groupId: data2[i].groupId });
+        arr.push({ groupName: data2[i].groupName, groupId: data2[i].id });
       }
       dispatch(messageAction.setGroups(arr));
     } catch (error) {
       alert(data.error);
     }
   }
+
+  function viewChat(item) {
+    dispatch(messageAction.setShowMessage(true));
+    dispatch(
+      messageAction.setGroupInfo({
+        groupId: item.groupId,
+        groupName: item.groupName,
+      })
+    );
+    socket.emit("joinChat", item.groupId);
+  }
+
+  function viewInfo(item) {
+    dispatch(
+      messageAction.setGroupInfo({
+        groupId: item.groupId,
+        groupName: item.groupName,
+      })
+    );
+  }
+
   return (
-    <Main>
+    <div className="groupsBg">
       {!groupInfo && (
         <>
-          <h3 className="chats">Chats</h3>
+          <h3 className="chatsHome">Chats</h3>
           <div className="chatList">
             {groups.map((item) => {
               return (
-                <li className="chat" id={item.groupId}>
+                <motion.li initial={{scale:1}} whileHover={{scale:.9,x:0}} transition={{type:"tween",stiffness:100}} className="chat" id={item.groupId}>
                   <button
                     className="fa-solid fa-circle-info backBtn"
                     onClick={() => {
-                      dispatch(
-                        messageAction.setGroupInfo({
-                          groupId: item.groupId,
-                          groupName: item.groupName,
-                        })
-                      );
+                      viewInfo(item)
                     }}
                   ></button>
-                  <p>{item.groupName}</p>
-                  <button
-                    type="button"
+                  <p
                     onClick={() => {
-                      dispatch(messageAction.setShowMessage(true));
-                      dispatch(
-                        messageAction.setGroupInfo({
-                          groupId: item.groupId,
-                          groupName: item.groupName,
-                        })
-                      );
-                      socket.emit('joinChat',item.groupId)
+                      viewChat(item);
                     }}
-                    className="fa-solid fa-angle-right viewChatBtn"
-                  ></button>
-                </li>
+                  >
+                    {item.groupName}
+                  </p>
+                  <i className="fa-solid fa-angle-right viewChatIcon" onClick={() => {
+                      viewChat(item);
+                    }}></i>
+                </motion.li>
               );
             })}
             {groups.length === 0 && (
@@ -89,7 +100,7 @@ const MessageList = () => {
       )}
       {groupInfo && <GroupInfo />}
       {showMessage && <Messages />}
-    </Main>
+    </div>
   );
 };
 

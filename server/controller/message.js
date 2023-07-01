@@ -15,6 +15,7 @@ const sendMessage = async (req, res, next) => {
         name: userName.name,
         UserId: req.userId,
         groupId: req.body.groupId,
+        time:req.body.time
       },
       { transaction: t }
     );
@@ -49,7 +50,7 @@ const getMessages = async (req, res, next) => {
     try {
       const getMsgs = await Message.findAll({
         where: { groupId },
-        attributes: ["name", "messages"],
+        attributes: ["name", "messages","time"],
         offset: reqOffset,
         limit: 10,
       });

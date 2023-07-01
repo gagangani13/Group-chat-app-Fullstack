@@ -17,5 +17,6 @@ module.exports.Message=database.define('Message',{
     groupId:{
         allowNull:false,
         type:INTEGER
-    }
+    },
+    time:STRING
 })

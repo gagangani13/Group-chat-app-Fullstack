@@ -10,14 +10,10 @@ import Chats from "./Components/Home/Chats/Chats";
 import './App.css'
 import NewGroup from "./Components/Home/NewGroup/NewGroup";
 
-
-
-
 const App = () => {
   const location=useLocation()
   return (
-    <Provider store={store}>
-      <div className="chatBg"/>      
+    <Provider store={store}>     
       <Header/>
       <AnimatePresence>
         <Switch location={location} key={location.key}>
@@ -30,11 +26,11 @@ const App = () => {
           <Route path="/NewGroup" exact>
             <NewGroup/>
           </Route>
-          <Route path='*'>
-            <Redirect to='/Chats'/>
-          </Route>
           <Route path='/Password/:Id' exact>
             <ChangePassword/>
+          </Route>
+          <Route path='*'>
+            <Redirect to='/Chats'/>
           </Route>
         </Switch>
       </AnimatePresence>

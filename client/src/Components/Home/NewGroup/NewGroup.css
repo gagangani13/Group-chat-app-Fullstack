@@ -1,0 +1,21 @@
+#createGroup {
+  position: fixed;
+  top: 15vh;
+  display: grid;
+  width: 50vw;
+  left: 25vw;
+  text-align: center;
+  row-gap: 2vh;
+}
+
+#groupName {
+  background-color: black;
+  color: azure;
+}
+
+@media screen and (max-width: 500px) {
+  #createGroup {
+    width: 80vw;
+    left: 10vw;
+  }
+}
