@@ -64,7 +64,7 @@ app.use(router);
 
 //wrongUrl
 app.use("/", (req, res) => {
-  res.redirect("http://3.232.208.74:5000/");
+  res.redirect("http://3.232.208.74:3000/");
 });
 
 database

@@ -24,7 +24,7 @@ module.exports.validateForgotPasswordLink=async(req,res,next)=>{
         if (findPassword.isActive==1||null){
             res.redirect(`http://3.232.208.74:3000/Password/${UUID}`)
         }else{
-            res.send('<h1>The link has been expired. Please request via <a href="http://3.232.208.74:3000/">Expense Tracker</a></h1>')
+            res.send('<h1>The link has been expired. Please request via <a href="http://3.232.208.74:3000/">Chat App</a></h1>')
         }
     } catch (error) {
         res.send({message:error})
