@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://3.232.208.74:3000",
     methods: ["GET", "POST","DELETE","PATCH","PUT"],
   },
 });
@@ -64,7 +64,7 @@ app.use(router);
 
 //wrongUrl
 app.use("/", (req, res) => {
-  res.redirect("http://localhost:5000/");
+  res.redirect("http://3.232.208.74:5000/");
 });
 
 database

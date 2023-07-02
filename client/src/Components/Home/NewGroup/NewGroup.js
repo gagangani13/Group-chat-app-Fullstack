@@ -15,7 +15,7 @@ const NewGroup = () => {
       return alert("Invalid input");
     }
     const response = await axios.post(
-      "http://localhost:5000/createGroup",
+      "http://3.232.208.74:5000/createGroup",
       { groupName: groupRef.current.value },
       { headers: { Authorization: idToken } }
     );

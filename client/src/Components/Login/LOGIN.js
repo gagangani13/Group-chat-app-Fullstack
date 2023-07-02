@@ -36,7 +36,7 @@ const LOGIN = () => {
     e.preventDefault();
     if (!login) {
       if (passwordRef.current.value === confirmRef.current.value) {
-        const response = await axios.post("http://localhost:5000/newUser", {
+        const response = await axios.post("http://3.232.208.74:5000/newUser", {
           email: emailRef.current.value,
           password: passwordRef.current.value,
           name: nameRef.current.value,
@@ -63,7 +63,7 @@ const LOGIN = () => {
       }
     } else if (login && newPassword) {
       const response = await axios.post(
-        "http://localhost:5000/forgotPassword",
+        "http://3.232.208.74:5000/forgotPassword",
         { email: emailRef.current.value }
       );
       const data = await response.data;
@@ -79,7 +79,7 @@ const LOGIN = () => {
       }
       alert(data.message);
     } else {
-      const response = await axios.post("http://localhost:5000/loginUser", {
+      const response = await axios.post("http://3.232.208.74:5000/loginUser", {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
