@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const io = new Server(server, {
   cors: {
-    origin: "https://gagan-chat-app.vercel.app/",
+    origin: "https://gagan-chat-app.vercel.app",
     methods: ["GET", "POST","DELETE","PATCH","PUT"],
   },
 });
@@ -64,7 +64,7 @@ app.use(router);
 
 //wrongUrl
 app.use("/", (req, res) => {
-  res.redirect("https://gagan-chat-app.vercel.app//");
+  res.redirect("https://gagan-chat-app.vercel.app/");
 });
 
 database
