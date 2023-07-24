@@ -1,5 +1,5 @@
 const database=require('../database/database');
-const {Sequelize, INTEGER, STRING, BOOLEAN}=require('sequelize')
+const { INTEGER, STRING}=require('sequelize')
 module.exports.User=database.define('User',{
     id:{
         type:INTEGER,

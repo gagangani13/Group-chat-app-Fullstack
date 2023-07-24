@@ -5,3 +5,5 @@ const database=new Sequelize(process.env.DATABASE_NAME,process.env.DATABASE_USER
     host:process.env.DATABASE_HOST
 })
 module.exports=database
+
+
