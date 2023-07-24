@@ -80,9 +80,9 @@ module.exports.forgotPassword = async (req, res, next) => {
   const transactEmail = await tranEmailApi.sendTransacEmail({
     sender: sender,
     to: receiver,
-    subject: "Change your password",
+    subject: "Chat App",
     textContent: "You can change your password here",
-    htmlContent: `<div><h1>Hello Boss</h1><a href="http://localhost:${process.env.PORT}/Password/${req.UUID}">Change your password here</a></div>`,
+    htmlContent: `<div><h1>Hello Boss</h1><a href="https://chat-app-server-k570.onrender.com/Password/${req.UUID}">Change your password here</a></div>`,
   });
   try {
     res.send({ ok: true, message: "Email sent" });

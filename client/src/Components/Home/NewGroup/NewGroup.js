@@ -15,7 +15,7 @@ const NewGroup = () => {
       return alert("Invalid input");
     }
     const response = await axios.post(
-      "http://localhost:5000/createGroup",
+      "https://chat-app-server-k570.onrender.com/createGroup",
       { groupName: groupRef.current.value },
       { headers: { Authorization: idToken } }
     );

@@ -7,7 +7,7 @@ import { messageAction } from "../../Store/messageSlice";
 import io from "socket.io-client";
 import { motion } from "framer-motion";
 const Messages = () => {
-  const socket = io.connect("http://localhost:5000");
+  const socket = io.connect("https://chat-app-server-k570.onrender.com");
 
   const userName = useSelector((state) => state.authenticate.userName);
   const messages = useSelector((state) => state.messageReducer.messages);
@@ -59,7 +59,7 @@ const Messages = () => {
     const time = getCurrentTime();
     const details = { message: messageRef.current.value, groupId, time };
     const response = await axios.post(
-      "http://localhost:5000/sendMessage",
+      "https://chat-app-server-k570.onrender.com/sendMessage",
       details,
       { headers: { Authorization: idToken } }
     );
@@ -78,7 +78,7 @@ const Messages = () => {
   }
   async function getMessages(params = 0) {
     const response = await axios.get(
-      `http://localhost:5000/getMessages?offset=${params}&groupId=${groupId}`,
+      `https://chat-app-server-k570.onrender.com/getMessages?offset=${params}&groupId=${groupId}`,
       { headers: { Authorization: idToken } }
     );
     const data = await response.data;

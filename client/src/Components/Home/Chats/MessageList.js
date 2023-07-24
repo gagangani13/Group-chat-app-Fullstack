@@ -9,7 +9,7 @@ import Messages from "./Messages";
 import io from "socket.io-client";
 import { motion } from "framer-motion";
 const MessageList = () => {
-  const socket = io.connect("http://localhost:5000");
+  const socket = io.connect("https://chat-app-server-k570.onrender.com");
 
   const groupInfo = useSelector((state) => state.messageReducer.groupInfo);
   const idToken = localStorage.getItem("idToken");
@@ -23,7 +23,7 @@ const MessageList = () => {
   }, [groupInfo]);
 
   async function getGroups() {
-    const response = await axios.get("http://localhost:5000/groups", {
+    const response = await axios.get("https://chat-app-server-k570.onrender.com/groups", {
       headers: { Authorization: idToken },
     });
     const data = await response.data;

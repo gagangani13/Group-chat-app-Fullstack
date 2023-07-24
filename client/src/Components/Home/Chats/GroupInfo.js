@@ -39,7 +39,7 @@ const GroupInfo = () => {
   }
   async function getParticipants() {
     const response = await axios.get(
-      `http://localhost:5000/getParticipants?groupId=${groupId}`,
+      `https://chat-app-server-k570.onrender.com/getParticipants?groupId=${groupId}`,
       { headers: { Authorization: idToken } }
     );
     const data = await response.data;
@@ -71,7 +71,7 @@ const GroupInfo = () => {
   async function addToGroup(e) {
     const id = e.target.id;
     const response = await axios.post(
-      `http://localhost:5000/joinGroup?groupId=${groupId}`,
+      `https://chat-app-server-k570.onrender.com/joinGroup?groupId=${groupId}`,
       { participantId: id },
       { headers: { Authorization: idToken } }
     );
@@ -87,7 +87,7 @@ const GroupInfo = () => {
   }
   async function makeAdmin() {
     const response = await axios.patch(
-      `http://localhost:5000/makeAdmin?groupId=${groupId}`,
+      `https://chat-app-server-k570.onrender.com/makeAdmin?groupId=${groupId}`,
       { participantId: options.id },
       { headers: { Authorization: idToken } }
     );
@@ -104,7 +104,7 @@ const GroupInfo = () => {
   }
   async function removeParticipant() {
     const response = await axios.delete(
-      `http://localhost:5000/removeParticipant/${options.id}?groupId=${groupId}`,
+      `https://chat-app-server-k570.onrender.com/removeParticipant/${options.id}?groupId=${groupId}`,
       { headers: { Authorization: idToken } }
     );
     const data = await response.data;
@@ -122,7 +122,7 @@ const GroupInfo = () => {
     const userResponse = prompt("Do you want to proceed? (Yes/No)");
     if (userResponse && userResponse.toLowerCase() === "yes") {
       const response = await axios.delete(
-        `http://localhost:5000/exitGroup/${groupId}`,
+        `https://chat-app-server-k570.onrender.com/exitGroup/${groupId}`,
         { headers: { Authorization: idToken } }
       );
       const data = await response.data;
@@ -143,7 +143,7 @@ const GroupInfo = () => {
       alert("Please input the group name to change it !!");
     } else {
       const response = await axios.patch(
-        `http://localhost:5000/editGroupName?groupId=${groupId}`,
+        `https://chat-app-server-k570.onrender.com/editGroupName?groupId=${groupId}`,
         { groupName: newGroupNameRef.current.value,groupId },
         { headers: { Authorization: idToken } }
       );
